@@ -1,0 +1,77 @@
+<div class="text-center">
+  <app-spinner *ngIf="isLoading">
+     
+  </app-spinner>
+</div>
+<div class="row">
+  
+    <div class="col-md-3 mb-1" *ngFor="let p of displayTab">
+        <div class="card">
+            <div class="card-header" style="color: rgb(107, 5, 5); background-color: rgb(124, 168, 162);">{{p.productName}}</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                       <img [src]="p.productImageURL" alt="" width="200px" height="200px">
+                    </div>
+    
+                    <div class="col-md-12">
+                       {{p.productPrice}}
+                    </div>
+                    <div class="col-md-12">
+                        {{p.productDescription}}
+
+                    </div>
+    
+                </div>
+            </div>
+           
+            <div class="card-footer" style="display: flex; justify-content: space-around;">
+              <button type="button" class="btn btn-danger" (click)="onEdit(p)" data-toggle="modal" data-target="#exampleModal" >Edit</button>
+              <button type="button" class="btn btn-success" (click)="onDelete(p._id)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h2 class="modal-title " id="exampleModalLabel">Edit products</h2>
+    
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                
+            <div class="class-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Product Name</label>
+                  <input type="text" class="form-control" name="productName" formControlName="productName" >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">product price</label>
+                  <input type="text" class="form-control" name="productName" formControlName="productPrice" >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">product Description</label>
+                    <input type="text" class="form-control" name="productName" formControlName="productDescription" >
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">product ImageURL</label>
+                    <input type="text" class="form-control" name="productName" formControlName="productImageURL" >
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cls">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="onUpdate()">Update</button>
+                  </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
